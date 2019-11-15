@@ -2,12 +2,12 @@ import React,{useState,useEffect} from 'react';
 import { StyleSheet, Text, View,Button, TouchableOpacity,Alert } from 'react-native';
 import {MaterialCommunityIcons as Icon} from 'react-native-vector-icons';
 export default function App() {
-
-    const [gameState,setGameState]= useState([
+    const initialState = [
       [0,0,0],
       [0,0,0],
       [0,0,0]
-    ]);
+    ]
+    const [gameState,setGameState]= useState(initialState);
 
     const [currentPlayer,setCurrentPlayer] = useState(1);
 
@@ -16,13 +16,7 @@ export default function App() {
   },[]);
 
     const initializeGame = () =>{
-      setGameState(
-        [
-          [0,0,0],
-          [0,0,0],
-          [0,0,0]
-        ]
-      );
+      setGameState(initialState);
       setCurrentPlayer(1);
     };
 
@@ -101,8 +95,18 @@ export default function App() {
     // if no winner
         return 0;
       }
+const endGame = () =>{
+  var end = gameState.forEach(row=>{
+      if(row.includes(0) === false){
+        return 
+      }
+  
+        }
     
-const winner = getWinner();
+    )
+    
+  }   
+var  winner = getWinner();
       if(winner == 1){
         Alert.alert('Player 1 is the winner');
         initializeGame();//reset game
@@ -110,6 +114,11 @@ const winner = getWinner();
         Alert.alert('Player 2 is the winner');
         initializeGame();//reset game
       }
+
+const onNewGamePress = () =>{
+  setGameState(initialState);
+}
+      
   return (
     <View style={styles.container}>
       
@@ -151,8 +160,13 @@ const winner = getWinner();
       </View>
 
     <View style={styles.playername}>
-      <Button title={`${currentPlayer==1? 'Player1': 'Player2'}`} style={{color:`${(currentPlayer==1)? 'red':'black'}`}}/>
+      <Button title={`${currentPlayer==1? 'Player 1 turn': 'Player 2 turn'}`} />
     </View>
+
+    <View >
+      <Button title='New Game' onPress={onNewGamePress} style={[styles.newGame]}   color="#841584"/>
+    </View>
+
   </View>
   ); 
 }
@@ -185,7 +199,13 @@ const styles = StyleSheet.create({
     flex:0,
     alignItems:'flex-end',
     justifyContent:'flex-end',
-    marginVertical:100,
+    paddingTop: 40,
 
+  },
+  newGame:{
+    flex:0,
+    alignItems:'flex-end',
+    justifyContent:'flex-end',
+    paddingTop: 10,
   }
 });
