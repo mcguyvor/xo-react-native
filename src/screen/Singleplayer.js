@@ -176,7 +176,7 @@ return (
   </View>
 
   <View >
-    <Button title='New Game' onPress={onNewGamePress} style={[styles.newGame]}   color="#841584"/>
+    <Button title='Restart game' onPress={onNewGamePress} style={[styles.newGame]}   color="#841584"/>
   </View>
 
 </View>

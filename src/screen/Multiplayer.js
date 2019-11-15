@@ -95,17 +95,7 @@ const initialState = [
   // if no winner
       return 0;
     }
-const endGame = () =>{
-var end = gameState.forEach(row=>{
-    if(row.includes(0) === false){
-      return 
-    }
 
-      }
-  
-  )
-  
-}   
 var  winner = getWinner();
     if(winner == 1){
       Alert.alert('Player 1 is the winner');
@@ -167,7 +157,7 @@ return (
   </View>
 
   <View >
-    <Button title='New Game' onPress={onNewGamePress} style={[styles.newGame]}   color="#841584"/>
+    <Button title='Restart game' onPress={onNewGamePress} style={[styles.newGame]}   color="#841584"/>
   </View>
 
 </View>
