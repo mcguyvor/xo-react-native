@@ -21,7 +21,7 @@ const initialState = [
   };
 
   const renderIcon = (row,col) =>{
-    var value = gameState[row][col];
+    const value = gameState[row][col];
     switch(value){
       case 1 : return<Icon name='close' style={styles.tileX}/>
       case -1 : return <Icon name='circle-outline' style={styles.tile0}/>
@@ -34,33 +34,33 @@ const initialState = [
 
     // No tile change when tile not equal 0
     
-      var value = gameState[row][col];
+      const value = gameState[row][col];
       if(value!==0){
         return ;
       }
     
 
       // current player
-      var current = currentPlayer;
+      const current = currentPlayer;
 
-      var arr = gameState.slice();
+      const arr = gameState.slice();
       arr[row][col] = current;
       setGameState(arr);
 
       //switch player
 
-      var nextPlayer = (current ==1)? -1 : 1;
+      const nextPlayer = (current ==1)? -1 : 1;
       setCurrentPlayer(nextPlayer);
   }
 
   // return winner player
   const getWinner =()=>{
     const numTile = 3;
-    var arr = gameState;
-    var sum;
+    const arr = gameState;
+    let sum;
 
     //check row of sum
-    for( var i=0;i<numTile;i++){
+    for( let i=0;i<numTile;i++){
       sum = arr[i][0] + arr[i][1]+ arr[i][2];
       if(sum == 3){
           return 1; //mean 1+1+1 by player 1
@@ -69,7 +69,7 @@ const initialState = [
         }
       }
   //check column
-    for(var i=0;i<numTile;i++){
+    for(let i=0;i<numTile;i++){
       sum = arr[0][i] + arr[1][i] + arr[2][i];
       if(sum == 3){
         return 1; //mean 1+1+1 by player 1
@@ -96,7 +96,7 @@ const initialState = [
       return 0;
     }
 
-var  winner = getWinner();
+const  winner = getWinner();
     if(winner == 1){
       Alert.alert('Player 1 is the winner');
       initializeGame();//reset game
