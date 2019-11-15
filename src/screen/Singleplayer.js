@@ -12,8 +12,8 @@ const initialState = [
   const [currentPlayer,setCurrentPlayer] = useState(1);
 
   useEffect(()=>{
-    initializeGame();
-},[]);
+      bot();
+},[gameState]);
 
   const initializeGame = () =>{
     setGameState(initialState);
@@ -95,33 +95,45 @@ const initialState = [
   // if no winner
       return 0;
     }
-const endGame = () =>{
-var end = gameState.forEach(row=>{
-    if(row.includes(0) === false){
-      return 
-    }
 
-      }
-  
-  )
-  
-}   
 var  winner = getWinner();
     if(winner == 1){
       Alert.alert('Player 1 is the winner');
       initializeGame();//reset game
     }else if(winner == -1){
-      Alert.alert('Player 2 is the winner');
+      Alert.alert('Bot is the winner');
       initializeGame();//reset game
     }
 
 const onNewGamePress = () =>{
 setGameState(initialState);
 }
+
+const bot = () =>{
+        
+        while(currentPlayer == -1){
+            let row = Math.floor(Math.random() * (3 - 0) + 0);
+            let col = Math.floor(Math.random() * (3 - 0) + 0);
+            let value = gameState[row][col];
+            const current = currentPlayer;
+            if(value==0){
+                const arr = gameState.slice();
+                arr[row][col] = current;
+                setGameState(arr);
+                const nextPlayer = (current ==1)? -1 : 1;
+                setCurrentPlayer(nextPlayer);
+                break;
+            }
+        }  
+}       
     
+
 return (
   <View style={styles.container}>
     
+    <View style={styles.player1sign}><Text style={styles.playertext}>Player 1 : X</Text></View>
+    
+    <View style={styles.player2sign}><Text style={styles.playertext}>Bot : 0</Text></View>
     
     <View style={{flexDirection:'row'}}>
       <TouchableOpacity onPress={()=>onTilePress(0,0)} style={[styles.tiles,{borderLeftWidth:0, borderTopWidth:0}]}>
@@ -160,7 +172,7 @@ return (
     </View>
 
   <View style={styles.playername}>
-    <Button title={`${currentPlayer==1? 'Player 1 turn': 'Bot'}`} />
+    <Button title={`${currentPlayer==1? 'Player 1 X': 'Bot'}`} />
   </View>
 
   <View >
@@ -207,6 +219,18 @@ newGame:{
   alignItems:'flex-end',
   justifyContent:'flex-end',
   paddingTop: 10,
+},
+player1sign:{
+    position:'absolute',
+    top:10,
+},
+player2sign:{
+    position:'absolute',
+    top:40,
+},
+playertext:{
+    fontSize:20,
+
 }
 });
 

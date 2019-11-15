@@ -122,6 +122,9 @@ setGameState(initialState);
 return (
   <View style={styles.container}>
     
+    <View style={styles.player1sign}><Text style={styles.playertext}>Player 1 : X</Text></View>
+    
+    <View style={styles.player2sign}><Text style={styles.playertext}>Player 2 : 0</Text></View>
     
     <View style={{flexDirection:'row'}}>
       <TouchableOpacity onPress={()=>onTilePress(0,0)} style={[styles.tiles,{borderLeftWidth:0, borderTopWidth:0}]}>
@@ -160,7 +163,7 @@ return (
     </View>
 
   <View style={styles.playername}>
-    <Button title={`${currentPlayer==1? 'Player 1 turn': 'Player 2 turn'}`} />
+    <Button title={`${currentPlayer==1? 'Player 1 ': 'Player 2 '}`} />
   </View>
 
   <View >
@@ -207,6 +210,17 @@ newGame:{
   alignItems:'flex-end',
   justifyContent:'flex-end',
   paddingTop: 10,
+},
+player1sign:{
+    position:'absolute',
+    top:10,
+},
+player2sign:{
+    position:'absolute',
+    top:40,
+},
+playertext:{
+    fontSize:20,
 }
 });
 
