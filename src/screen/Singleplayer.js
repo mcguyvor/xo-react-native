@@ -107,26 +107,35 @@ const  winner = getWinner();
 
 const onNewGamePress = () =>{
 setGameState(initialState);
+setCurrentPlayer(1);
 }
 
 const bot = () =>{
-        
-        while(currentPlayer == -1){
-            let row = Math.floor(Math.random() * (3 - 0) + 0);
-            let col = Math.floor(Math.random() * (3 - 0) + 0);
-            let value = gameState[row][col];
-            const current = currentPlayer;
-            if(value==0){
-                const arr = gameState.slice();
-                arr[row][col] = current;
-                setGameState(arr);
-                const nextPlayer = (current ==1)? -1 : 1;
-                setCurrentPlayer(nextPlayer);
-                break;
+          let end = false;
+          for(let i=0;i<3;i++){
+            check = gameState[i].includes(0);
+            if(check){
+              end = check;
+              break;
             }
-        }  
+          }
+          
+          while(currentPlayer == -1 && end){
+              let row = Math.floor(Math.random() * (3 - 0) + 0);
+              let col = Math.floor(Math.random() * (3 - 0) + 0);
+              let value = gameState[row][col];
+              const current = currentPlayer;
+              if(value==0){
+                  const arr = gameState.slice();
+                  arr[row][col] = current;
+                  setGameState(arr);
+                  const nextPlayer = (current ==1)? -1 : 1;
+                  setCurrentPlayer(nextPlayer);
+                  break;
+              }
+          }
+        
 }       
-    
 
 return (
   <View style={styles.container}>
